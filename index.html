@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>時空引航者：我的寫作冒險之旅</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+    body { font-family: 'Noto Sans TC', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-xl font-bold shadow-md shadow-indigo-200">
+          <i class="fa-solid fa-compass"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-black text-slate-800 tracking-wide">時空引航者：我的寫作冒險之旅</h1>
+          <p class="text-xs text-indigo-600 font-semibold">第一人稱沉浸式寫作引導遊戲</p>
+        </div>
+      </div>
+      <div class="text-right text-xs text-slate-500 hidden sm:block">
+        <span class="inline-block bg-indigo-50 text-indigo-700 font-bold px-3 py-1 rounded-full border border-indigo-100">國中組徵文主題：穿越時空，我想……</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-4 py-8 w-full flex-grow">
+
+    <!-- Progress Bar -->
+    <div class="mb-8 bg-white rounded-2xl p-4 shadow-sm border border-slate-200">
+      <div class="flex justify-between text-xs sm:text-sm font-bold text-slate-600 mb-2 px-1">
+        <span id="step-label-1" class="text-indigo-600"><i class="fa-solid fa-1 mr-1"></i> 我要選哪種章法與座標？</span>
+        <span id="step-label-2" class="text-slate-400 hidden sm:inline"><i class="fa-solid fa-2 mr-1"></i> 體驗</span>
+        <span id="step-label-3" class="text-slate-400 hidden sm:inline"><i class="fa-solid fa-3 mr-1"></i> 動機</span>
+        <span id="step-label-4" class="text-slate-400"><i class="fa-solid fa-4 mr-1"></i> 藍圖</span>
+      </div>
+      <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 25%"></div>
+      </div>
+    </div>
+
+    <!-- Step 1 Section -->
+    <section id="step-1" class="space-y-6">
+      
+      <!-- 章法選擇 -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center">
+          <i class="fa-solid fa-sitemap text-indigo-600 mr-2"></i> 步驟 1：選擇我要使用的文章骨架（5 大通用章法模組）
+        </h3>
+        <p class="text-xs text-slate-500 mb-4">我打算用哪一種結構來說我的穿越故事？</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <label class="cursor-pointer">
+            <input type="radio" name="essay_module" value="今昔今模組" class="peer hidden" checked onchange="selectModule('今昔今模組')">
+            <div class="p-4 rounded-xl border-2 border-slate-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50/40 hover:border-slate-300 transition-all h-full flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded mr-1">模組 ①</span>
+                <h4 class="font-bold text-slate-800 text-base my-1">今昔今模組</h4>
+                <p class="text-xs text-indigo-700 font-semibold mb-2">【眼前/腦海景物 → 順敘往事 → 呼應省思】</p>
+                <p class="text-xs text-slate-600">我由身邊的景物觸發穿越回憶，敘述故事後再回到當下，極具情感渲染力。</p>
+              </div>
+            </div>
+          </label>
+
+          <label class="cursor-pointer">
+            <input type="radio" name="essay_module" value="總分總模組" class="peer hidden" onchange="selectModule('總分總模組')">
+            <div class="p-4 rounded-xl border-2 border-slate-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50/40 hover:border-slate-300 transition-all h-full flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded mr-1">模組 ②</span>
+                <h4 class="font-bold text-slate-800 text-base my-1">總分總模組</h4>
+                <p class="text-xs text-indigo-700 font-semibold mb-2">【總說 → 分項一/二/三並列 → 總結】</p>
+                <p class="text-xs text-slate-600">我先總結興奮心情，再從三個面向詳細介紹我所看見的時空世界。</p>
+              </div>
+            </div>
+          </label>
+
+          <label class="cursor-pointer">
+            <input type="radio" name="essay_module" value="起承轉合順敘" class="peer hidden" onchange="selectModule('起承轉合順敘')">
+            <div class="p-4 rounded-xl border-2 border-slate-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50/40 hover:border-slate-300 transition-all h-full flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded mr-1">模組 ③</span>
+                <h4 class="font-bold text-slate-800 text-base my-1">起承轉合〈順敘模組〉</h4>
+                <p class="text-xs text-indigo-700 font-semibold mb-2">【入題 → 事件前情 → 突發狀況 → 省思】</p>
+                <p class="text-xs text-slate-600">最經典的故事敘述方式，我按時間順序完整寫出我的時空冒險。</p>
+              </div>
+            </div>
+          </label>
+
+          <label class="cursor-pointer">
+            <input type="radio" name="essay_module" value="起承轉合議論" class="peer hidden" onchange="selectModule('起承轉合議論')">
+            <div class="p-4 rounded-xl border-2 border-slate-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50/40 hover:border-slate-300 transition-all h-full flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded mr-1">模組 ④</span>
+                <h4 class="font-bold text-slate-800 text-base my-1">起承轉合〈議論模組〉</h4>
+                <p class="text-xs text-indigo-700 font-semibold mb-2">【入題 → 正反 A → 反正 B 對比 → 省思】</p>
+                <p class="text-xs text-slate-600">我拿穿越後的景象與現實生活做強烈對比，凸顯我深層的思想轉變。</p>
+              </div>
+            </div>
+          </label>
+
+          <label class="cursor-pointer md:col-span-2">
+            <input type="radio" name="essay_module" value="翻案四段論" class="peer hidden" onchange="selectModule('翻案四段論')">
+            <div class="p-4 rounded-xl border-2 border-slate-200 peer-checked:border-indigo-600 peer-checked:bg-indigo-50/40 hover:border-slate-300 transition-all h-full flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-indigo-600 bg-indigo-100 px-2 py-0.5 rounded mr-1">模組 ⑤</span>
+                <h4 class="font-bold text-slate-800 text-base my-1">起承轉合〈翻案四段論〉</h4>
+                <p class="text-xs text-indigo-700 font-semibold mb-2">【傳統詮釋 → 反面破壞 → 正面重建 → 總結新意】</p>
+                <p class="text-xs text-slate-600">我打破傳統看法，先質疑常見觀點，再提出我自己對穿越時空的深刻見解。</p>
+              </div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- 時空座標 -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-800 mb-2 flex items-center">
+          <i class="fa-solid fa-location-dot text-indigo-600 mr-2"></i> 步驟 2：鎖定我的「時空座標」
+        </h3>
+        <p class="text-xs text-slate-500 mb-4">想像我現在站在時空傳送門前，按下按鈕後，我最想前往哪一個「時間」與「地點」？</p>
+        
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-bold text-slate-700 mb-2">我想選擇的冒險路線：</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button type="button" id="btn-dir-a" onclick="setDirection('A')" class="p-3.5 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold flex items-center justify-center gap-2 transition-all">
+                <i class="fa-solid fa-rocket"></i> 🚀 路線 A：我想飛向未來或宇宙
+              </button>
+              <button type="button" id="btn-dir-b" onclick="setDirection('B')" class="p-3.5 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold flex items-center justify-center gap-2 hover:border-slate-300 transition-all">
+                <i class="fa-solid fa-clock-rotate-left"></i> 👵 路線 B：我想回到過去
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+            <p class="text-sm font-bold text-slate-700 mb-2">✍️ 我的填空練習：</p>
+            <div class="flex flex-wrap items-center gap-2 text-sm text-slate-800">
+              <span>我想前往</span>
+              <input type="text" id="target-time" placeholder="時間（如：2150年/阿公18歲那年）" value="2150年" class="px-3 py-1.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-sm font-semibold w-full sm:w-auto flex-grow">
+              <span>，去到</span>
+              <input type="text" id="target-place" placeholder="地點（如：火星海底生態艙/古早柑仔店）" value="火星海底生態艙" class="px-3 py-1.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-sm font-semibold w-full sm:w-auto flex-grow">
+              <span>。</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex justify-end">
+        <button type="button" onclick="goToStep(2)" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+          下一步：展開我的感官與細節 <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Step 2 Section -->
+    <section id="step-2" class="space-y-6 hidden">
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-800 mb-1 flex items-center">
+          <i class="fa-solid fa-lightbulb text-amber-500 mr-2"></i> 步驟 3：擴充我的具體寫作素材（第一人稱感官摹寫）
+        </h3>
+        <p class="text-xs text-slate-500 mb-6">點擊適合我的範例按鈕自動帶入，或是直接寫下我親眼所見、親身經歷的具體事例：</p>
+
+        <!-- Route A (Future/Universe) -->
+        <div id="dir-a-questions" class="space-y-6">
+          
+          <div class="p-4 rounded-xl bg-indigo-50/50 border border-indigo-100">
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              🚀 視覺畫面：我一睜開眼，看到了什麼？（點擊可快速帶入）
+            </label>
+            <div class="flex flex-wrap gap-2 my-2">
+              <button type="button" onclick="setExample('vision-a', '我看見自己站在懸浮在幾千公尺高空的磁浮軌道上，身旁穿梭著光軌飛車，車窗外是巨大的藍色全息投影廣告與高聳入雲的晶瑩大樓。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 1：高空磁浮車與晶瑩大樓</button>
+              <button type="button" onclick="setExample('vision-a', '我抬頭看見巨大的半球形透明玻璃罩罩住整個火星基地，罩外是紫紅色的浩瀚天空，身邊長滿了發出微微藍光的奇異外星植物與發光溪流。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 2：火星玻璃罩與發光溪流</button>
+              <button type="button" onclick="setExample('vision-a', '我注意到路上的行人不再手持手機，而是戴著輕巧的透明眼鏡，只要輕輕眨眼，眼前就會彈出閃爍的全息螢幕與流暢的選單。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 3：透明眼鏡與浮空全息螢幕</button>
+            </div>
+            <textarea id="vision-a" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-slate-800 text-sm">我看見自己站在懸浮在幾千公尺高空的磁浮軌道上，身旁穿梭著光軌飛車，車窗外是巨大的藍色全息投影廣告與高聳入雲的晶瑩大樓。</textarea>
+          </div>
+
+          <div class="p-4 rounded-xl bg-indigo-50/50 border border-indigo-100">
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              🤖 生活體驗：那裡的 AI 或機器人正在做什麼？它們如何改變我的生活？
+            </label>
+            <div class="flex flex-wrap gap-2 my-2">
+              <button type="button" onclick="setExample('experience-a', '陪伴型 AI 能精準讀取我的心率與情緒，當我感到低落時，它自動播放溫柔的音樂並端上一杯熱調飲；醫療機器人則能在三秒內完成掃描治癒傷口。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 1：懂我情緒的陪伴 AI</button>
+              <button type="button" onclick="setExample('experience-a', '我親眼看見自動化農耕機器人在火星溫室裡穿梭，不需要陽光和土壤，就能快速培育出富含營養的高效能糧食。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 2：火星溫室自動化農耕</button>
+              <button type="button" onclick="setExample('experience-a', '我體驗了 AI 導師的學習系統，它不需要課本，而是透過腦波連結將歷史畫面的震撼感直接傳遞給我，讓我像親歷電影現場一樣學習。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 3：腦波連結沉浸式學習</button>
+            </div>
+            <textarea id="experience-a" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-slate-800 text-sm">陪伴型 AI 能精準讀取我的心率與情緒，當我感到低落時，它自動播放溫柔的音樂並端上一杯熱調飲；醫療機器人則能在三秒內完成掃描治癒傷口。</textarea>
+          </div>
+
+          <div class="p-4 rounded-xl bg-indigo-50/50 border border-indigo-100">
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              ✨ 特別任務：我在那裡最想體驗的一項發明或活動是什麼？
+            </label>
+            <div class="flex flex-wrap gap-2 my-2">
+              <button type="button" onclick="setExample('mission-a', '我穿上了反重力噴射飛行衣，張開雙臂像鳥兒一樣，自由自在地翱翔穿梭在未來城市的摩天大樓之間。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 1：穿反重力衣高空飛行</button>
+              <button type="button" onclick="setExample('mission-a', '我走進「記憶重現艙」，選取經典時刻，親身站在現場見證人類第一次登陸外星球的偉大畫面。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 2：進入記憶艙見證登陸時刻</button>
+              <button type="button" onclick="setExample('mission-a', '我品嚐了分子料理機瞬間調配出的「星空星雲塔」，感受到前所未有的奇妙口感與果香層次。')" class="text-xs bg-white border border-indigo-200 text-indigo-700 hover:bg-indigo-100 px-2.5 py-1 rounded-lg">💡 靈感 3：品嚐分子科技料理</button>
+            </div>
+            <textarea id="mission-a" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-slate-800 text-sm">我穿上了反重力噴射飛行衣，張開雙臂像鳥兒一樣，自由自在地翱翔穿梭在未來城市的摩天大樓之間。</textarea>
+          </div>
+
+        </div>
+
+        <!-- Route B (Past) -->
+        <div id="dir-b-questions" class="space-y-6 hidden">
+          
+          <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-100">
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              👵 時光倒流：我看見當時的世界（街道、衣服、玩具）和現在有什麼不同？
+            </label>
+            <div class="flex flex-wrap gap-2 my-2">
+              <button type="button" onclick="setExample('vision-b', '我看見自己走在窄小的紅磚瓦房巷弄裡，空氣中飄著古早味麵攤的柴魚香氣；沒有智慧型手機，街邊只有綠色的公用電話亭與騎著老單車的郵差。')" class="text-xs bg-white border border-amber-200 text-amber-800 hover:bg-amber-100 px-2.5 py-1 rounded-lg">💡 靈感 1：紅磚巷與切仔麵柴魚香</button>
+              <button type="button" onclick="setExample('vision-b', '我看見巷口柑仔店的大玻璃罐裡裝滿了抽抽樂與軟糖，孩子們踩著木頭屐，在碾米廠外的空地上開心玩踢罐子與打彈珠。')" class="text-xs bg-white border border-amber-200 text-amber-800 hover:bg-amber-100 px-2.5 py-1 rounded-lg">💡 靈感 2：柑仔店抽抽樂與打彈珠</button>
+              <button type="button" onclick="setExample('vision-b', '我看見客廳擺著像木箱一樣沉重的黑白電視機，旁邊堆滿了錄音帶與卡帶收音機，牆上掛著手繪的大張月曆。')" class="text-xs bg-white border border-amber-200 text-amber-800 hover:bg-amber-100 px-2.5 py-1 rounded-lg">💡 靈感 3：黑白電視與卡帶收音機</button>
+            </div>
+            <textarea id="vision-b" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-slate-800 text-sm">我看見自己走在窄小的紅磚瓦房巷弄裡，空氣中飄著古早味麵攤的柴魚香氣；沒有智慧型手機，街邊只有綠色的公用電話亭與騎著老單車的郵差。</textarea>
+          </div>
+
+          <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-100">
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              ☀️ 重溫珍貴時刻：那天的天氣如何？我們正在做什麼？
+            </label>
+            <div class="flex flex-wrap gap-2 my-2">
+              <button type="button" onclick="setExample('experience-b', '那是個金黃色的溫暖午後，陽光透過老榕樹葉灑在泥土路上，阿公穿著白色汗衫，坐在三輪車旁耐心教我如何削木頭做陀螺。')" class="text-xs bg-white border border-amber-200 text-amber-800 hover:bg-amber-100 px-2.5 py-1 rounded-lg">💡 靈感 1：榕樹下阿公教我削陀螺</button>
+              <button type="button" onclick="setExample('experience-b', '午後下了一場清爽的陣雨，院子裡的青草氣味格外濃郁，我和幼犬「小白」在雨停後的草地上開心地追著蝴蝶打滾。')" class="text-xs bg-white border border-amber-200 text-amber-800 hover:bg-amber-100 px-2.5 py-1 rounded-lg">💡 靈感 2：雨後與寵物小白追蝴蝶</button>
+              <button type="button" onclick="setExample('experience-b', '涼爽的夏夜裡，阿媽手裡搖著竹扇，在三合院的大稻埕裡鋪上涼蓆，一邊剝著甜甜的文旦，一邊指著繁星給我講故事。')" class="text-xs bg-white border border-amber-200 text-amber-800 hover:bg-amber-100 px-2.5 py-1 rounded-lg">💡 靈感 3：夏夜稻埕阿媽搖扇講故事</button>
+            </div>
+            <textarea id="experience-b" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-slate-800 text-sm">那是個金黃色的溫暖午後，陽光透過老榕樹葉灑在泥土路上，阿公穿著白色汗衫，坐在三輪車旁耐心教我如何削木頭做陀螺。</textarea>
+          </div>
+
+          <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-100">
+            <label class="block text-sm font-bold text-slate-800 mb-1">
+              💬 對話設計：如果能和當時的他們說一句話，我最想說什麼？
+            </label>
+            <div class="flex flex-wrap gap-2 my-2">
+              <button type="button" onclick="setExample('mission-b', '我忍不住上前緊緊擁抱年輕時的阿公阿媽說：「謝謝你們當年辛苦的付出，未來的我們過得很幸福，我也會帶著你們的勇敢好好長大。」')" class="text-xs bg-white border border-amber-200 text-amber-800 hover:bg-amber-100 px-2.5 py-1 rounded-lg">💡 靈感 1：擁抱長輩表達感謝</button>
+              <button type="button" onclick="setExample('mission-b', '我蹲下來輕撫小白軟軟的耳朵說：「謝謝你曾陪伴我度過最快樂的童年，在未來的世界裡，我從來都沒有忘記過你。」')" class="text-xs bg-white border border-amber-200 text-amber-800 hover:bg-amber-100 px-2.5 py-1 rounded-lg">💡 靈感 2：撫摸離去寵物說心聲</button>
+            </div>
+            <textarea id="mission-b" rows="3" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-slate-800 text-sm">我忍不住上前緊緊擁抱年輕時的阿公阿媽說：「謝謝你們當年辛苦的付出，未來的我們過得很幸福，我也會帶著你們的勇敢好好長大。」</textarea>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-between gap-3">
+        <button type="button" onclick="goToStep(1)" class="order-2 sm:order-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-xl transition-all text-center">
+          <i class="fa-solid fa-arrow-left"></i> 上一步
+        </button>
+        <button type="button" onclick="goToStep(3)" class="order-1 sm:order-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+          下一步：我的動機與七階立意 <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Step 3 Section -->
+    <section id="step-3" class="space-y-6 hidden">
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-5">
+        <h3 class="text-lg font-bold text-slate-800 mb-1 flex items-center">
+          <i class="fa-solid fa-heart text-rose-500 mr-2"></i> 步驟 4：深化我的文章核心（動機與感悟）
+        </h3>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-2">1. 為什麼這個時空對我而言如此重要？（可多選）</label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+              <input type="checkbox" name="motive" value="實現夢想：探索未知，滿足我的好奇心" class="rounded text-indigo-600 mr-2.5" checked>
+              <span>實現夢想：探索未知，滿足我的好奇心</span>
+            </label>
+            <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+              <input type="checkbox" name="motive" value="解開疑問：想親眼見證歷史或未來的真相" class="rounded text-indigo-600 mr-2.5">
+              <span>解開疑問：想親眼見證歷史或未來的真相</span>
+            </label>
+            <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+              <input type="checkbox" name="motive" value="彌補遺憾：想去抱抱已經分開的對象，重新好好說再見" class="rounded text-indigo-600 mr-2.5">
+              <span>彌補遺憾：想去抱抱已經分開的對象，重新好好說再見</span>
+            </label>
+            <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+              <input type="checkbox" name="motive" value="留下珍貴回憶：想再次體驗那段幸福的時光" class="rounded text-indigo-600 mr-2.5">
+              <span>留下珍貴回憶：想再次體驗那段幸福的時光</span>
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">2. 我這趟旅程的驚喜與感動（我遇見了誰？發生了什麼意想不到的互動？）：</label>
+          <textarea id="story-interaction" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-slate-800 text-sm">我遇見了未來的科研導師，他親切地帶我走進未來的實驗室，並送給我一顆象徵無限可能的能量結晶體。</textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">3. 我帶回現實的「時空紀念品」（這段經歷讓我產生了什麼新想法？如何改變我當下的態度？）：</label>
+          <textarea id="time-souvenir" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 text-slate-800 text-sm">我深刻明白未來的精采源自於現在的努力，因此我決定不再虛度光陰，勇敢追求自己的科學夢想。</textarea>
+        </div>
+      </div>
+
+      <!-- 七階立意梯 -->
+      <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+        <h3 class="text-lg font-bold text-slate-800 mb-1 flex items-center">
+          <i class="fa-solid fa-stairs text-emerald-600 mr-2"></i> 結尾改寫與昇華：我選擇的「七階立意梯」心法
+        </h3>
+        <p class="text-xs text-slate-500 mb-4">選擇最適合我文章結尾的思考層次，讓我的文章思想從表面認知提升至哲理高度：</p>
+
+        <div class="space-y-2 text-sm">
+          <label class="flex items-start p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+            <input type="radio" name="ladder" value="個人 → 親人 → 他人：將眼界由自身擴及至身邊的人，再推廣到更廣大的群體。" class="mt-1 mr-3 text-indigo-600" checked>
+            <div>
+              <span class="font-bold text-slate-800">1. 個人 → 親人 → 他人</span>
+              <p class="text-xs text-slate-500">將我的眼界由自身擴及至身邊的親友，再推廣到更廣大的社會群體。</p>
+            </div>
+          </label>
+
+          <label class="flex items-start p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+            <input type="radio" name="ladder" value="分享經驗 → 回饋他人：不只停留在自身的獲得，更進一步思考如何付出與幫助別人。" class="mt-1 mr-3 text-indigo-600">
+            <div>
+              <span class="font-bold text-slate-800">2. 分享經驗 → 回饋他人</span>
+              <p class="text-xs text-slate-500">不只停留在我的收穫，更進一步思考未來我如何付出與幫助他人。</p>
+            </div>
+          </label>
+
+          <label class="flex items-start p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+            <input type="radio" name="ladder" value="檢討過去 → 策勵將來：反省過往的不足或錯誤，並訂定未來的期許與方向。" class="mt-1 mr-3 text-indigo-600">
+            <div>
+              <span class="font-bold text-slate-800">3. 檢討過去 → 策勵將來</span>
+              <p class="text-xs text-slate-500">反省過往的不足或遺憾，並訂定我對未來的積極期許與行動方向。</p>
+            </div>
+          </label>
+
+          <label class="flex items-start p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+            <input type="radio" name="ladder" value="得之於人 → 出之於己：感念他人給予的幫助，轉換為自己對社會的奉獻。" class="mt-1 mr-3 text-indigo-600">
+            <div>
+              <span class="font-bold text-slate-800">4. 得之於人 → 出之於己</span>
+              <p class="text-xs text-slate-500">感念一路以來他人給予我的關愛與幫助，轉換為我對世界的奉獻。</p>
+            </div>
+          </label>
+
+          <label class="flex items-start p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+            <input type="radio" name="ladder" value="常識 → 知識 → 見識：讓文章的思想從表面認知，提升到深層的理解與人生見解。" class="mt-1 mr-3 text-indigo-600">
+            <div>
+              <span class="font-bold text-slate-800">5. 常識 → 知識 → 見識</span>
+              <p class="text-xs text-slate-500">讓我的文章思想從表面的新鮮感，提升至深層的洞察力與獨特見解。</p>
+            </div>
+          </label>
+
+          <label class="flex items-start p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+            <input type="radio" name="ladder" value="陽光、積極、正向、健康：展現面對困境時不氣餒、積極向上的態度。" class="mt-1 mr-3 text-indigo-600">
+            <div>
+              <span class="font-bold text-slate-800">6. 陽光、積極、正向、健康</span>
+              <p class="text-xs text-slate-500">展現我面對未知或困境時不氣餒、勇敢擁抱當下的積極向上態度。</p>
+            </div>
+          </label>
+
+          <label class="flex items-start p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+            <input type="radio" name="ladder" value="宏觀、轉念、智慧、哲理：跳脫框架、換位思考，賦予文章具備哲學高度與人生智慧。" class="mt-1 mr-3 text-indigo-600">
+            <div>
+              <span class="font-bold text-slate-800">7. 宏觀、轉念、智慧、哲理（最高境界）</span>
+              <p class="text-xs text-slate-500">跳脫時間限制的框架，換位思考，賦予我的文章具備哲學高度的智慧結尾。</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-between gap-3">
+        <button type="button" onclick="goToStep(2)" class="order-2 sm:order-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-xl transition-all text-center">
+          <i class="fa-solid fa-arrow-left"></i> 上一步
+        </button>
+        <button type="button" onclick="generateOutline()" class="order-1 sm:order-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> 生成我的專屬寫作藍圖
+        </button>
+      </div>
+    </section>
+
+    <!-- Step 4 Result Section -->
+    <section id="step-4" class="space-y-6 hidden">
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-md space-y-6">
+        
+        <div class="border-b border-slate-200 pb-4 flex flex-wrap justify-between items-center gap-2">
+          <div>
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-full">第一人稱專屬寫作藍圖</span>
+            <h2 class="text-2xl font-black text-slate-800 mt-1">「穿越時空，我想……」我的作文大綱</h2>
+          </div>
+          <div class="text-xs text-slate-500">
+            採用章法：<span id="out-module-name" class="font-bold text-indigo-600">今昔今模組</span>
+          </div>
+        </div>
+
+        <!-- 4-Paragraph Blueprint -->
+        <div class="space-y-4 text-slate-800">
+          
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <h4 class="font-bold text-indigo-700 mb-1 flex items-center">
+              <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs mr-2">起</span>
+              第一段（起）：吸引人的開頭（我的時空座標與動機）
+            </h4>
+            <p id="p1-text" class="text-sm leading-relaxed text-slate-700 pl-8"></p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <h4 class="font-bold text-indigo-700 mb-1 flex items-center">
+              <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs mr-2">承</span>
+              第二段（承）：細節描繪（我的感官體驗與具體景象）
+            </h4>
+            <p id="p2-text" class="text-sm leading-relaxed text-slate-700 pl-8"></p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+            <h4 class="font-bold text-indigo-700 mb-1 flex items-center">
+              <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs mr-2">轉</span>
+              第三段（轉）：故事核心（我的轉折、對話與情緒震憾）
+            </h4>
+            <p id="p3-text" class="text-sm leading-relaxed text-slate-700 pl-8"></p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
+            <h4 class="font-bold text-emerald-800 mb-1 flex items-center">
+              <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs mr-2">合</span>
+              第四段（合）：完美結尾（我的時空紀念品與立意昇華）
+            </h4>
+            <p id="p4-text" class="text-sm leading-relaxed text-slate-700 pl-8"></p>
+          </div>
+
+        </div>
+
+        <div class="flex flex-col sm:flex-row flex-wrap gap-3 pt-2">
+          <button type="button" onclick="copyOutline()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl shadow transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-copy"></i> 複製大綱
+          </button>
+          <button type="button" onclick="window.print()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-print"></i> 列印 / PDF
+          </button>
+          <button type="button" onclick="goToStep(1)" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-3 rounded-xl transition-all">
+            重新設計
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+    <div class="max-w-5xl mx-auto px-4">
+      時空引航者：我的寫作冒險之旅 &copy; 2026 | 國中寫作解題與思維升華系統
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none translate-y-4">
+    <div id="toast-message" class="bg-slate-800 text-white px-6 py-3 rounded-full shadow-lg font-medium text-sm flex items-center gap-2">
+      <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400"></i> 
+      <span id="toast-text"></span>
+    </div>
+  </div>
+
+  <script>
+    let gameState = {
+      module: '今昔今模組',
+      direction: 'A',
+      targetTime: '2150年',
+      targetPlace: '火星海底生態艙',
+      vision: '',
+      experience: '',
+      mission: '',
+      motives: [],
+      storyInteraction: '',
+      timeSouvenir: '',
+      ladder: ''
+    };
+
+    function selectModule(mod) { gameState.module = mod; }
+
+    function setExample(elementId, text) {
+      document.getElementById(elementId).value = text;
+    }
+
+    function setDirection(dir) {
+      gameState.direction = dir;
+      const btnA = document.getElementById('btn-dir-a');
+      const btnB = document.getElementById('btn-dir-b');
+      const qA = document.getElementById('dir-a-questions');
+      const qB = document.getElementById('dir-b-questions');
+
+      if (dir === 'A') {
+        btnA.className = 'p-3.5 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold flex items-center justify-center gap-2 transition-all';
+        btnB.className = 'p-3.5 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold flex items-center justify-center gap-2 hover:border-slate-300 transition-all';
+        qA.classList.remove('hidden');
+        qB.classList.add('hidden');
+      } else {
+        btnB.className = 'p-3.5 rounded-xl border-2 border-indigo-600 bg-indigo-50 text-indigo-900 font-bold flex items-center justify-center gap-2 transition-all';
+        btnA.className = 'p-3.5 rounded-xl border-2 border-slate-200 bg-white text-slate-700 font-bold flex items-center justify-center gap-2 hover:border-slate-300 transition-all';
+        qB.classList.remove('hidden');
+        qA.classList.add('hidden');
+      }
+    }
+
+    function goToStep(step) {
+      [1, 2, 3, 4].forEach(s => {
+        document.getElementById(`step-${s}`).classList.add('hidden');
+        const label = document.getElementById(`step-label-${s}`);
+        if (label) {
+          if (s <= step) {
+             label.classList.remove('text-slate-400');
+             label.classList.add('text-indigo-600', 'font-bold');
+          } else {
+             label.classList.remove('text-indigo-600', 'font-bold');
+             label.classList.add('text-slate-400');
+          }
+        }
+      });
+      document.getElementById('progress-bar').style.width = `${step * 25}%`;
+      document.getElementById(`step-${step}`).classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function generateOutline() {
+      gameState.targetTime = document.getElementById('target-time').value || '未定的時間';
+      gameState.targetPlace = document.getElementById('target-place').value || '未定的地點';
+
+      if (gameState.direction === 'A') {
+        gameState.vision = document.getElementById('vision-a').value;
+        gameState.experience = document.getElementById('experience-a').value;
+        gameState.mission = document.getElementById('mission-a').value;
+      } else {
+        gameState.vision = document.getElementById('vision-b').value;
+        gameState.experience = document.getElementById('experience-b').value;
+        gameState.mission = document.getElementById('mission-b').value;
+      }
+
+      const checkedMotives = document.querySelectorAll('input[name="motive"]:checked');
+      gameState.motives = Array.from(checkedMotives).map(cb => cb.value);
+      gameState.storyInteraction = document.getElementById('story-interaction').value;
+      gameState.timeSouvenir = document.getElementById('time-souvenir').value;
+
+      const selectedLadder = document.querySelector('input[name="ladder"]:checked');
+      gameState.ladder = selectedLadder ? selectedLadder.value : '';
+
+      document.getElementById('out-module-name').innerText = gameState.module;
+
+      let p1 = '', p2 = '', p3 = '', p4 = '';
+
+      if (gameState.module === '今昔今模組') {
+        p1 = `【描摹眼前/腦海景物】我從眼前身邊的一件物品（或一張舊照片、夜空繁星）觸發了靈感，按下時空按鈕，我直接宣布這次穿越的座標為「${gameState.targetTime}」的「${gameState.targetPlace}」。我這次穿越的核心動機在於：${gameState.motives.join('；') || '展開未知的探索'}。`;
+        p2 = `【順敘往事與細節】當我一睜開眼，映入眼簾的震撼景象是：${gameState.vision}。我沉浸並體驗當地的日常生活：${gameState.experience}。我還特別親自嘗試了：${gameState.mission}，充滿了強烈的感官衝擊與新鮮感。`;
+        p3 = `【核心回憶與對話】在那裡，我遇見了關鍵的人物或角色，並展開了特別的互動：${gameState.storyInteraction}。我心中的疑問與遺憾在這一刻獲得了答案，內心充滿了感動。`;
+        p4 = `【呼應首段情景與省思】時空旅程結束，我帶回了專屬的「時空紀念品」：${gameState.timeSouvenir}。重新回到當下的生活，我的視野已全然不同。結合立意梯「${gameState.ladder}」，我的文章將昇華至深刻的人生成長感悟。`;
+      } else if (gameState.module === '總分總模組') {
+        p1 = `【總說】我寫出自己獲得穿越時空能力的無比興奮感，並總括宣布我這次冒險目標為「${gameState.targetTime}」的「${gameState.targetPlace}」，我希望能夠：${gameState.motives.join('；')}。`;
+        p2 = `【分項敘述】我分為三個層面詳細描寫我所見的世界：(一)視覺環境：${gameState.vision}；(二)生活體驗：${gameState.experience}；(三)特色活動：${gameState.mission}。`;
+        p3 = `【事件轉折與互動】在這趟總體體驗中，最讓我震撼的高潮是我遇見了專屬互動：${gameState.storyInteraction}，深化了我整趟冒險的情感重量。`;
+        p4 = `【總結】我總結這趟時空冒險帶給我的「時空紀念品」：${gameState.timeSouvenir}。運用「${gameState.ladder}」的心法，總結這段經歷如何影響我現在看待未來與人生的態度。`;
+      } else if (gameState.module === '起承轉合順敘') {
+        p1 = `【入題與前情】我描寫自己站在時空傳送門前的心情，宣布我的時空座標為「${gameState.targetTime}」的「${gameState.targetPlace}」，我懷抱著：${gameState.motives.join('；')} 的期待啟航。`;
+        p2 = `【事件前情與環境】到達目標時空後，我詳細描繪我所看到的景色：${gameState.vision}。我融入當地的生活體驗：${gameState.experience}，並參與了特別活動：${gameState.mission}。`;
+        p3 = `【事件轉折】我敘述旅程中發生的突發狀況或核心對話互動：${gameState.storyInteraction}。這一刻我的心境發生了顯著調整，解開了我原本心中的迷惘。`;
+        p4 = `【扣題與省思】我帶著時空紀念品「${gameState.timeSouvenir}」回到現實生活。運用「${gameState.ladder}」心法，點出這次穿越經歷帶給我當下生活的正面啟發與改變。`;
+      } else if (gameState.module === '起承轉合議論') {
+        p1 = `【入題】我從當前生活的現狀或社會觀察切入，宣布我希望前往「${gameState.targetTime}」的「${gameState.targetPlace}」，去探討：${gameState.motives.join('；')}。`;
+        p2 = `【正反 A 對比】我描繪當地的震撼環境與生活型態：${gameState.vision} 與 ${gameState.experience}，並將其與我現在的生活進行強烈的正反對比，點出各自的優缺點。`;
+        p3 = `【反正 B 認知調整】透過體驗特別發明（${gameState.mission}）以及與當地人的互動對話（${gameState.storyInteraction}），我重新調整了自己對「幸福」或「科技/歷史」的認知定義。`;
+        p4 = `【扣題省思與總結】我獲得了時空紀念品：${gameState.timeSouvenir}。結合「${gameState.ladder}」的立意梯層次，展現出我超越時空的宏觀思考與哲理結晶。`;
+      } else { // 翻案四段論
+        p1 = `【傳統詮釋】我先提出一般人對穿越時空或過去/未來的傳統看法（如：只是一場好玩的科幻幻想）。接著我宣布前往「${gameState.targetTime}」的「${gameState.targetPlace}」，我的動機為：${gameState.motives.join('；')}。`;
+        p2 = `【反面論述（破壞）】親身體驗了 ${gameState.vision} 與 ${gameState.experience} 後，我開始質疑傳統看法的不足，發現單純的幻想無法解決現實生活中的問題。`;
+        p3 = `【正面論述（重建）】透過特別活動（${gameState.mission}）與深度對話（${gameState.storyInteraction}），我重新定義了穿越時空的真正價值在於「理解過去」與「開創未來」。`;
+        p4 = `【總結新意】我帶回了時空紀念品：${gameState.timeSouvenir}。運用「${gameState.ladder}」心法，提出我獨特且具備哲理高度的時空新見解。`;
+      }
+
+      document.getElementById('p1-text').innerText = p1;
+      document.getElementById('p2-text').innerText = p2;
+      document.getElementById('p3-text').innerText = p3;
+      document.getElementById('p4-text').innerText = p4;
+
+      goToStep(4);
+    }
+
+    // Custom UI Notification to replace alert()
+    function showToast(message, isError = false) {
+      const container = document.getElementById('toast-container');
+      const text = document.getElementById('toast-text');
+      const icon = document.getElementById('toast-icon');
+      
+      text.innerText = message;
+      if (isError) {
+        icon.className = 'fa-solid fa-circle-exclamation text-rose-400';
+      } else {
+        icon.className = 'fa-solid fa-circle-check text-emerald-400';
+      }
+
+      container.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      container.classList.add('opacity-100', 'translate-y-0');
+
+      setTimeout(() => {
+        container.classList.remove('opacity-100', 'translate-y-0');
+        container.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }, 3000);
+    }
+
+    function copyOutline() {
+      const p1 = document.getElementById('p1-text').innerText;
+      const p2 = document.getElementById('p2-text').innerText;
+      const p3 = document.getElementById('p3-text').innerText;
+      const p4 = document.getElementById('p4-text').innerText;
+
+      const fullText = `【題目】穿越時空，我想……
+【第一人稱寫作大綱】
+【採用章法】${gameState.module}
+
+第一段（起）：\n${p1}\n
+第二段（承）：\n${p2}\n
+第三段（轉）：\n${p3}\n
+第四段（合）：\n${p4}\n`;
+
+      // Fallback method for iFrame embedded environments where navigator.clipboard might fail
+      const fallbackCopy = () => {
+        const textArea = document.createElement("textarea");
+        textArea.value = fullText;
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          const successful = document.execCommand('copy');
+          if (successful) {
+            showToast('我的作文大綱已成功複製到剪貼簿！');
+          } else {
+            showToast('複製失敗，請手動複製文字。', true);
+          }
+        } catch (err) {
+          showToast('複製失敗，請手動複製文字。', true);
+        }
+        document.body.removeChild(textArea);
+      };
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(fullText).then(() => {
+          showToast('我的作文大綱已成功複製到剪貼簿！');
+        }).catch(err => {
+          fallbackCopy();
+        });
+      } else {
+        fallbackCopy();
+      }
+    }
+  </script>
+</body>
+</html>
